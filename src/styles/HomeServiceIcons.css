@@ -1,0 +1,65 @@
+.service-container {
+  max-width: 520px;
+  background: #fff;
+  border: 1px solid #eaeaea;
+  border-radius: 14px;
+  padding: 22px;
+}
+
+.service-title {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.service-card {
+  background: #f7f7f7;
+  border-radius: 12px;
+  padding: 14px;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.service-card:hover {
+  background: #f0f0f0;
+  transform: translateY(-3px);
+}
+
+.service-card img {
+  width: 42px;
+  height: 42px;
+  margin-bottom: 10px;
+}
+
+.service-card p {
+  font-size: 13px;
+  font-weight: 500;
+  color: #333;
+}
+
+/* BADGES */
+.badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 10px;
+  padding: 3px 6px;
+  border-radius: 6px;
+  color: #fff;
+}
+
+.badge.new {
+  background: #e91e63;
+}
+
+.badge.sale {
+  background: #4caf50;
+}

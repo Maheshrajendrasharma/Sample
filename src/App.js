@@ -1,24 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+
+import Home from "./pages/Home";
+import ServicesPage from "./pages/ServicesPage";
+import Contact from "./pages/Contact";
+
+import Navbar from "./components/Navbar";
+import FloatingActions from "./components/FloatingActions";
+import LeftBookingButton from "./components/LeftBookingButton";
+import FloatingWhatsapp from "./components/FloatingWhatsapp";
+import Ticker from "./components/Ticker";
+
+/* 🔹 Layout wrapper to control visibility */
+function Layout() {
+  const location = useLocation();
+  const isContactPage = location.pathname === "/contact";
+
+  return (
+    <>
+      <Navbar />
+      <Ticker />
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/services" element={<ServicesPage />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+
+      {/* ✅ Book Now hidden ONLY on Contact page */}
+      {!isContactPage && <LeftBookingButton />}
+
+      <FloatingActions />
+      <FloatingWhatsapp />
+    </>
+  );
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Layout />
+    </BrowserRouter>
   );
 }
 
