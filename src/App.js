@@ -37,7 +37,7 @@ function Layout() {
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="Sample">
       <Layout />
     </BrowserRouter>
   );

@@ -5,7 +5,7 @@ function Navbar() {
     <header className="navbar">
       {/* Logo */}
       <div className="logo">
-        <img src="/logo.png" alt="Urban Spa" />
+        <img src={`${process.env.PUBLIC_URL}/logo.png`}  alt="Urban Spa" />
         <span>URBAN BEAUTY & SPA</span>
       </div>
 

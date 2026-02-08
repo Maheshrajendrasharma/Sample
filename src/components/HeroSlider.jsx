@@ -2,17 +2,17 @@ import { useEffect, useState } from "react";
 
 const slides = [
   {
-    image: "/slider/slide1.jpg",
+    image: `${process.env.PUBLIC_URL}/slider/slide1.jpg`,
     title: "Bridal Mehendi Service",
     subtitle: "Elegant designs at your doorstep",
   },
   {
-    image: "/slider/slide2.jpg",
+    image: `${process.env.PUBLIC_URL}/slider/slide2.jpg`,
     title: "Salon at Home",
     subtitle: "Professional beauty services",
   },
   {
-    image: "/slider/slide3.jpg",
+    image: `${process.env.PUBLIC_URL}/slider/slide3.jpg`,
     title: "Luxury Spa Experience",
     subtitle: "Relax, refresh and rejuvenate",
   },
@@ -25,7 +25,6 @@ function HeroSlider() {
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % slides.length);
     }, 5000);
-
     return () => clearInterval(interval);
   }, []);
 

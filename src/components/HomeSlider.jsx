@@ -1,11 +1,10 @@
 import Slider from "react-slick";
 
 const images = [
-  "/slider/slide1.jpg",
-  "/slider/slide2.jpg",
-  "/slider/slide3.jpg",
+  `${process.env.PUBLIC_URL}/slider/slide1.jpg`,
+  `${process.env.PUBLIC_URL}/slider/slide2.jpg`,
+  `${process.env.PUBLIC_URL}/slider/slide3.jpg`,
 ];
-
 
 export default function HomeSlider() {
   const settings = {
@@ -20,7 +19,12 @@ export default function HomeSlider() {
   return (
     <Slider {...settings} className="home-slider">
       {images.map((img, i) => (
-        <img key={i} src={img} alt="Service banner" />
+        <img
+          key={i}
+          src={img}
+          alt="Service banner"
+          loading="lazy"
+        />
       ))}
     </Slider>
   );
