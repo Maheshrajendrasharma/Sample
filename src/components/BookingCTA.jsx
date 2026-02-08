@@ -1,8 +1,5 @@
 function BookingCTA() {
-  const phoneNumber = "919999999999"; // replace with your WhatsApp number
-  const message =
-    "Hello, I would like to book a spa service. Please share details.";
-
+  
  
 
   return (
