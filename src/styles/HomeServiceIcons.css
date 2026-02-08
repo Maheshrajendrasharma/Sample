@@ -1,23 +1,27 @@
-.service-container {
+/* OUTER CONTAINER */
+.service-box {
   max-width: 520px;
   background: #fff;
   border: 1px solid #eaeaea;
-  border-radius: 14px;
+  border-radius: 16px;
   padding: 22px;
 }
 
-.service-title {
+/* TITLE */
+.service-box h3 {
   font-size: 22px;
   font-weight: 600;
   margin-bottom: 20px;
 }
 
+/* GRID */
 .service-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 18px;
 }
 
+/* CARD */
 .service-card {
   background: #f7f7f7;
   border-radius: 12px;
@@ -33,16 +37,20 @@
   transform: translateY(-3px);
 }
 
+/* ICON */
 .service-card img {
-  width: 42px;
-  height: 42px;
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
   margin-bottom: 10px;
 }
 
+/* TEXT */
 .service-card p {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
   color: #333;
+  margin: 0;
 }
 
 /* BADGES */

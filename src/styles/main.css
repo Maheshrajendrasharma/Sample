@@ -832,3 +832,32 @@ textarea:disabled {
     grid-template-columns: repeat(3, 1fr);
   }
 }
+
+
+.home-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  padding: 40px 60px;
+  align-items: start;
+}
+
+/* LEFT: ICON GRID */
+.home-left {
+  background: white;
+  border-radius: 16px;
+  padding: 30px;
+}
+
+/* RIGHT: SLIDER */
+.home-right {
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .home-layout {
+    grid-template-columns: 1fr;
+  }
+}
