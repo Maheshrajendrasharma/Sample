@@ -6,7 +6,8 @@ import BookingCTA from "../components/BookingCTA";
 export default function Home() {
   return (
     <>
-      <section className="home-top">
+      {/* Top section */}
+      <section className="home-layout">
         <div className="home-left">
           <HomeServiceIcons />
         </div>
@@ -16,6 +17,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Other sections */}
       <Services />
       <BookingCTA />
     </>

@@ -861,3 +861,49 @@ textarea:disabled {
     grid-template-columns: 1fr;
   }
 }
+
+
+.home-hero {
+  display: flex;
+  gap: 40px;
+  padding: 40px;
+  align-items: flex-start;
+}
+
+.home-left {
+  flex: 1;
+}
+
+.home-right {
+  flex: 1.3;
+}
+
+.slider-image {
+  width: 100%;
+  border-radius: 18px;
+}
+
+
+.home-layout {
+  display: flex;
+  gap: 40px;
+  padding: 40px 80px;
+  align-items: stretch;
+}
+
+.home-left {
+  flex: 1;
+  max-width: 520px;
+}
+
+.home-right {
+  flex: 1.2;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+  .home-layout {
+    flex-direction: column;
+    padding: 20px;
+  }
+}
