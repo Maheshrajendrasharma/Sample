@@ -1,0 +1,124 @@
+/* ============================= */
+/* Main Page Container */
+/* ============================= */
+
+.services-container {
+  width: 100%;
+  padding: 40px 0;   /* remove left & right padding */
+}
+
+
+.category-section {
+  margin-bottom: 50px;
+}
+
+/* ============================= */
+/* Header (Title + See All) */
+/* ============================= */
+
+.category-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.category-header h2 {
+  font-size: 22px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.view-all-btn {
+  background-color: #6c5ce7;
+  color: #fff;
+  padding: 8px 18px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: 0.3s ease;
+}
+
+.view-all-btn:hover {
+  background-color: #5848c2;
+}
+
+/* ============================= */
+/* Slider Layout */
+/* ============================= */
+
+.slider-wrapper {
+  position: relative;
+}
+
+.slider {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+
+  /* Hide Scrollbar */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.slider::-webkit-scrollbar {
+  display: none;
+}
+
+/* ============================= */
+/* Service Card */
+/* ============================= */
+
+.service-card {
+  min-width: 240px;
+  flex-shrink: 0;
+  background: #fff;
+  border-radius: 15px;
+  padding: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: 0.3s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+}
+
+.service-image {
+  height: 150px;
+  background-color: #f2f2f2;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+
+/* ============================= */
+/* Arrow Buttons */
+/* ============================= */
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  cursor: pointer;
+  font-size: 18px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.arrow.left {
+  left: -15px;
+}
+
+.arrow.right {
+  right: -15px;
+}

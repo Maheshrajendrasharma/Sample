@@ -1,5 +1,5 @@
-import UserLocationMap from "../components/UserLocationMap";
-import ContactForm from "../components/ContactForm";
+import UserLocationMap from "../UserLocationMap";
+import ContactForm from "../ContactForm";
 
 export default function Contact() {
   return (

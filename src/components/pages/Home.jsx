@@ -1,7 +1,8 @@
-import HomeServiceIcons from "../components/HomeServiceIcons";
-import HomeSlider from "../components/HomeSlider";
-import Services from "../components/Services";
-import BookingCTA from "../components/BookingCTA";
+import HomeServiceIcons from "../HomeServiceIcons";
+import HomeSlider from "../HomeSlider";
+import Services from "../Services";
+
+
 
 export default function Home() {
   return (
@@ -19,7 +20,7 @@ export default function Home() {
 
       {/* Other sections */}
       <Services />
-      <BookingCTA />
+
     </>
   );
 }

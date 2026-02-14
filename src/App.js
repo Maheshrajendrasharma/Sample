@@ -1,20 +1,18 @@
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-
-
-import Home from "./pages/Home";
-import ServicesPage from "./pages/ServicesPage";
-import Contact from "./pages/Contact";
+import ServiceDetails from "./components/ServiceDetails";
+import Home from "./components/pages/Home";
+import ServicesPage from "./components/pages/ServicesPage";
+import Contact from "./components/pages/Contact";
 
 import Navbar from "./components/Navbar";
 import FloatingActions from "./components/FloatingActions";
-import LeftBookingButton from "./components/LeftBookingButton";
 import FloatingWhatsapp from "./components/FloatingWhatsapp";
 import Ticker from "./components/Ticker";
 
 /* 🔹 Layout wrapper to control visibility */
 function Layout() {
   const location = useLocation();
-  const isContactPage = location.pathname === "/contact";
+ 
 
   return (
     <>
@@ -22,23 +20,23 @@ function Layout() {
       <Ticker />
 
       <Routes>
+        <Route path="/services/:id" element={<ServiceDetails />} />
+
         <Route path="/" element={<Home />} />
         <Route path="/services" element={<ServicesPage />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>
 
-      {/* ✅ Book Now hidden ONLY on Contact page */}
-      {!isContactPage && <LeftBookingButton />}
+      {/* Hide Book Now only on Home page */}
 
       <FloatingActions />
       <FloatingWhatsapp />
     </>
   );
 }
-
 function App() {
   return (
-    <BrowserRouter basename="Sample">
+    <BrowserRouter>
       <Layout />
     </BrowserRouter>
   );
