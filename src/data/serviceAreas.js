@@ -1,0 +1,21 @@
+export const serviceAreas = [
+  "Andheri East, Mumbai",
+  "Andheri West, Mumbai",
+  "Bandra East, Mumbai",
+  "Bandra West, Mumbai",
+  "Juhu, Mumbai",
+  "Powai, Mumbai",
+  "Ghatkopar East, Mumbai",
+  "Ghatkopar West, Mumbai",
+  "Malad East, Mumbai",
+  "Malad West, Mumbai",
+  "Borivali West, Mumbai",
+  "Borivali East, Mumbai",
+  "Mulund West, Mumbai",
+  "Mulund East, Mumbai",
+  "Chembur, Mumbai",
+  "Kurla West, Mumbai",
+  "Kurla East, Mumbai",
+  "Dadar West, Mumbai",
+  "Dadar East, Mumbai"
+];

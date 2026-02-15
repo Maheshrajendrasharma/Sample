@@ -3,7 +3,9 @@ import ServiceDetails from "./components/ServiceDetails";
 import Home from "./components/pages/Home";
 import ServicesPage from "./components/pages/ServicesPage";
 import Contact from "./components/pages/Contact";
-
+import Register from "./components/pages/Register";
+import Login from "./components/pages/Login";
+import CategoryPage from "./components/pages/CategoryPage";
 import Navbar from "./components/Navbar";
 import FloatingActions from "./components/FloatingActions";
 import FloatingWhatsapp from "./components/FloatingWhatsapp";
@@ -20,7 +22,10 @@ function Layout() {
       <Ticker />
 
       <Routes>
+        <Route path="/category/:categorySlug" element={<CategoryPage />} />
         <Route path="/services/:id" element={<ServiceDetails />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
 
         <Route path="/" element={<Home />} />
         <Route path="/services" element={<ServicesPage />} />
