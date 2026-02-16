@@ -7,7 +7,7 @@
         "Bathroom Cleaning",
         "Sofa Cleaning",
         "Carpet Cleaning",
-        "Mattress Cleaning",
+        "Mattress Cleaning",    
         "Curtain Cleaning",
         "Water Tank Cleaning",
         "Move-in / Move-out Cleaning",

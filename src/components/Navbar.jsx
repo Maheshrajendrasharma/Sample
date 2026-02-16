@@ -21,9 +21,12 @@
     //const [inputLocation, setInputLocation] = useState("");
 
   
-
 useEffect(() => {
-  if (!locationName) return;
+
+  if (!locationName || locationName.trim() === "") {
+    setServiceStatus("Enter location or reload to auto-detect.");
+    return;
+  }
 
   const isAvailable = serviceAreas.some(area =>
     locationName.toLowerCase().includes(
@@ -36,7 +39,9 @@ useEffect(() => {
       ? "Service Available in your area"
       : "Service Coming Soon in your area"
   );
+
 }, [locationName]);
+
 
     const handleSearch = (value) => {
       
@@ -125,15 +130,14 @@ useEffect(() => {
   
 
 
-  const [defaultLocation] = useState("");
 
   const selectLocation = (area) => {
     setLocationName(area);
     setLocationSuggestions([]);
     localStorage.setItem("selectedLocation", area);
 
-    const isAvailable = serviceAreas.some(area =>
-  locationName.toLowerCase().includes(area.toLowerCase().split(",")[0])
+    const isAvailable = serviceAreas.some(a =>
+  area.toLowerCase().includes(a.toLowerCase().split(",")[0])
 );
     setServiceStatus(
       isAvailable
@@ -145,13 +149,13 @@ useEffect(() => {
   };
 
     return (
-      <header className="w-full bg-white shadow-sm fixed top-0 left-0 z-50">
+      <header className="w-full bg-white shadow-sm backdrop-blur-md border-b border-gray-100 fixed top-0 left-0 z-50">
         
         {/* Navbar Container */}
-        <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-3">
+        <div className="max-w-7xl mx-auto flex items-center gap-10 px-8 py-4">
 
           {/* LEFT SECTION */}
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-8 self-center">
 
             <div className="md:hidden">
               <Menu size={24} />
@@ -159,10 +163,10 @@ useEffect(() => {
 
             <div className="flex items-center gap-2">
               <div className="bg-black text-white px-2 py-1 rounded font-bold">
-                UC
+                UH
               </div>
               <span className="font-semibold text-lg hidden sm:block">
-                MY Urban Help
+                My Urban Help
               </span>
             </div>
 
@@ -173,57 +177,41 @@ useEffect(() => {
             </div>
           </div>
 
-          {/* CENTER SECTION */}
-          <div className="relative flex items-center gap-2 border rounded-lg px-4 py-2 w-2/3 bg-white">
+         {/* CENTER SECTION */}
+<div className="flex items-center gap-10 flex-1 justify-center">
 
-    <MapPin size={18} />
+  {/* Location + Status Wrapper */}
+  <div className="flex flex-col w-72 justify-start">
 
-    <input
-    type="text"
-    value={locationName}
+    {/* Location Box */}
+    <div className="relative flex items-center gap-3 border border-gray-300 rounded-xl px-4 py-2.5 bg-white shadow-sm hover:shadow-md transition self-start">
+      <MapPin size={18} />
+      <input
+        type="text"
+        value={locationName}
+        onChange={(e) => {
+          const value = e.target.value;
 
-    onChange={(e) => {
-      const value = e.target.value;
+          if (!value.trim()) {
+            setLocationName("");
+            setLocationSuggestions([]);
+            return;
+          }
 
-      if (!value.trim()) {
-        setLocationName("");
-        setLocationSuggestions([]);
-        return;
-      }
+          const formatted = toTitleCase(value);
+          setLocationName(formatted);
 
-      const formatted = toTitleCase(value);
-      setLocationName(formatted);
+          const filtered = serviceAreas.filter(area =>
+            area.toLowerCase().includes(value.toLowerCase())
+          );
 
-      const filtered = serviceAreas.filter(area =>
-        area.toLowerCase().includes(value.toLowerCase())
-      );
-
-      setLocationSuggestions(filtered);
-      setActiveIndex(-1);
-    }}
-    onKeyDown={(e) => {
+          setLocationSuggestions(filtered);
+          setActiveIndex(-1);
+        }}
 
 
-      if (e.key === "Backspace") {
-    e.preventDefault();
-
-    const words = locationName.trim().split(" ");
-    words.pop();
-
-    const newValue = words.join(" ");
-    setLocationName(newValue);
-
-    const filtered = serviceAreas.filter(area =>
-      area.toLowerCase().includes(newValue.toLowerCase())
-    );
-
-    setLocationSuggestions(filtered);
-    setActiveIndex(-1);
-
-    return; // stop further execution
-  }
-
-      
+         // 🔥 ADD THIS ENTIRE BLOCK
+  onKeyDown={(e) => {
 
     if (locationSuggestions.length === 0) return;
 
@@ -247,87 +235,59 @@ useEffect(() => {
       const selected =
         activeIndex >= 0
           ? locationSuggestions[activeIndex]
-          : locationSuggestions[0]; // nearest match
+          : locationSuggestions[0]; // 🔥 Always pick first
 
-      setLocationName(selected);
-      setLocationSuggestions([]);
-      localStorage.setItem("selectedLocation", selected);
-
-      const isAvailable = serviceAreas
-        .map(a => a.toLowerCase())
-        .includes(selected.toLowerCase());
-
-      setServiceStatus(
-        isAvailable
-          ? "Service Available in your area"
-          : "Service Coming Soon in your area"
-      );
-
-      setActiveIndex(-1);
+      selectLocation(selected);
     }
+
   }}
 
 
 
-    onBlur={() => {
-    if (!locationName.trim()) {
-      setLocationName(defaultLocation);
-      return;
-    }
 
-    const isAvailable = serviceAreas.some(area =>
-  locationName.toLowerCase().includes(area.toLowerCase().split(",")[0])
-);
 
-    setServiceStatus(
-      isAvailable
-        ? "Service Available in your area"
-        : "Service Coming Soon in your area"
-    );
-  }}
 
-    className="text-sm outline-none w-full"
-  />
+        className="text-sm outline-none w-full"
+      />
 
-    {/* Dropdown Suggestions */}
-    {locationSuggestions.length > 0 && (
-      <div className="absolute top-12 left-0 w-full bg-white shadow-lg rounded-lg max-h-60 overflow-y-auto border z-50">
-        
-        {locationSuggestions.map((area, index) => (
-    <div
-      key={index}
-      onClick={() => selectLocation(area)}
-      className={`px-4 py-2 cursor-pointer text-sm ${
-        index === activeIndex
-          ? "bg-gray-200"
-          : "hover:bg-gray-100"
-      }`}
-    >
-      {area}
+      {locationSuggestions.length > 0 && (
+        <div className="absolute top-12 left-0 w-full bg-white shadow-lg rounded-lg max-h-60 overflow-y-auto z-50">
+          {locationSuggestions.map((area, index) => (
+            <div
+              key={index}
+              onClick={() => selectLocation(area)}
+              className={`px-4 py-2 cursor-pointer text-sm ${
+                index === activeIndex
+                  ? "bg-gray-200"
+                  : "hover:bg-gray-100"
+              }`}
+            >
+              {area}
+            </div>
+          ))}
+        </div>
+      )}
     </div>
-  ))}
 
+    {/* Status BELOW location */}
+    {serviceStatus && (
+      <div
+        className={`text-xs mt-1 ml-1 font-medium ${
+          serviceStatus.includes("Available")
+            ? "text-green-600"
+            : "text-red-500"
+        }`}
+      >
+        {serviceStatus}
       </div>
     )}
 
   </div>
 
-  {serviceStatus && (
-    <div
-      className={`text-xs mt-1 ${
-        serviceStatus.includes("Available")
-          ? "text-green-600"
-          : "text-red-500"
-      }`}
-    >
-      {serviceStatus}
-    </div>
-  )}
-
-
-
+  
+</div>
             {/* Search */}
-            <div className="relative flex items-center gap-2 border rounded-lg px-4 py-2 w-[80%] bg-white">
+            <div className="relative flex items-center gap-3 border border-gray-300 rounded-xl px-4 py-2.5 bg-white shadow-sm hover:shadow-md transition">
               <Search size={18} />
 
               <input
@@ -345,7 +305,7 @@ useEffect(() => {
               {/* 🔽 Search Results Dropdown */}
               
               {results.length > 0 && (
-    <div className="absolute top-12 left-0 w-full bg-white shadow-lg rounded-lg max-h-60 overflow-y-auto z-50 border">
+    <div className="absolute top-12 left-0 w-64 bg-white shadow-lg rounded-lg max-h-60 overflow-y-auto z-50 border">
       {results.map(service => (
         <div
           key={service.id}
@@ -370,10 +330,9 @@ useEffect(() => {
 
             </div>
           
-          </div>
 
           {/* RIGHT SECTION */}
-  <div className="flex items-center gap-6">
+  <div className="flex items-center gap-8 self-center">
 
     {/* Cart */}
     <div className="relative cursor-pointer">
@@ -393,6 +352,8 @@ useEffect(() => {
     </button>
 
   </div>
+  
+          </div>
       
       </header>
     );
