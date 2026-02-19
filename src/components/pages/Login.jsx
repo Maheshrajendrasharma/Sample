@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import {
   signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithPopup
 } from "firebase/auth";
@@ -13,20 +14,54 @@ import { doc, setDoc, getDoc } from "firebase/firestore";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isRegister, setIsRegister] = useState(false);
   const navigate = useNavigate();
 
-  // 🔥 EMAIL LOGIN
-  const handleLogin = async (e) => {
+  // ✅ LOGIN + REGISTER (EMAIL)
+  const handleEmailAuth = async (e) => {
     e.preventDefault();
+
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      let userCredential;
+
+      if (isRegister) {
+        // REGISTER
+        userCredential = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+      } else {
+        // LOGIN
+        userCredential = await signInWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+      }
+
+      const user = userCredential.user;
+
+      const docRef = doc(db, "users", user.uid);
+      const docSnap = await getDoc(docRef);
+
+      if (!docSnap.exists()) {
+        const ADMIN_EMAILS = ["youradminemail@gmail.com"];
+
+        await setDoc(docRef, {
+          email: user.email,
+          role: ADMIN_EMAILS.includes(user.email) ? "admin" : "user",
+          createdAt: new Date()
+        });
+      }
+
       navigate("/");
     } catch (error) {
       alert(error.message);
     }
   };
 
-  // 🔥 GOOGLE LOGIN
+  // ✅ GOOGLE LOGIN / REGISTER
   const handleGoogleLogin = async () => {
     try {
       const provider = new GoogleAuthProvider();
@@ -58,11 +93,11 @@ function Login() {
       <div className="bg-white p-8 rounded-lg shadow-md w-96">
 
         <h2 className="text-2xl font-semibold mb-6 text-center">
-          Login
+          {isRegister ? "Create Account" : "Login"}
         </h2>
 
-        {/* EMAIL LOGIN */}
-        <form onSubmit={handleLogin} className="space-y-4">
+        {/* EMAIL LOGIN / REGISTER */}
+        <form onSubmit={handleEmailAuth} className="space-y-4">
 
           <input
             type="email"
@@ -70,6 +105,7 @@ function Login() {
             className="w-full border p-2 rounded"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            required
           />
 
           <input
@@ -78,13 +114,14 @@ function Login() {
             className="w-full border p-2 rounded"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            required
           />
 
           <button
             type="submit"
             className="w-full bg-black text-white py-2 rounded"
           >
-            Login
+            {isRegister ? "Register" : "Login"}
           </button>
         </form>
 
@@ -100,6 +137,20 @@ function Login() {
           />
           Continue with Google
         </button>
+
+        {/* TOGGLE LOGIN / REGISTER */}
+        <p className="text-center text-sm mt-4">
+          {isRegister
+            ? "Already have an account?"
+            : "Don't have an account?"}
+
+          <button
+            onClick={() => setIsRegister(!isRegister)}
+            className="ml-2 font-medium hover:underline"
+          >
+            {isRegister ? "Login" : "Register"}
+          </button>
+        </p>
 
       </div>
     </div>
