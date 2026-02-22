@@ -229,17 +229,14 @@ useEffect(() => {
     };
 
       return (
-        <header className="w-full bg-white shadow-sm backdrop-blur-md border-b border-gray-100 fixed top-0 left-0 z-50">
+        <header className="w-full bg-white shadow-sm border-b border-gray-100 fixed top-0 left-0 z-50">
           
           {/* Navbar Container */}
           <div className="max-w-7xl mx-auto flex items-center justify-between px-4 md:px-8 py-3 h-20">
 
-          
-
-            
-
               <div className="flex items-center gap-2">
                  <div
+
   onClick={() => {
     if (window.innerWidth < 768) {
       // Mobile behavior → toggle menu
@@ -516,45 +513,58 @@ useEffect(() => {
 
   </div>
 
-
-  {mobileMenuOpen && (
+{/* Overlay (click outside to close) */}
+{mobileMenuOpen && (
   <div
     className="fixed inset-0 bg-black/40 z-40 md:hidden"
     onClick={() => setMobileMenuOpen(false)}
   />
 )}
 
+{/* Drawer */}
 <div
-  className={`fixed top-0 left-0 h-full w-64 bg-white shadow-xl z-50 transform transition-transform duration-300 md:hidden ${
+  className={`fixed top-0 left-0 h-full w-2/8 min-w-[20px] bg-white z-50 shadow-2xl transform transition-transform duration-500 ease-in-out md:hidden ${
     mobileMenuOpen ? "translate-x-0" : "-translate-x-full"
   }`}
 >
-  <div className="p-6 space-y-6">
+  <div className="p-5 h-full flex flex-col">
 
-    <div className="text-lg font-bold border-b pb-4">
-      Menu
+    {/* Header with Close Button */}
+    <div className="flex justify-between items-center border-b pb-4">
+
+      <button
+        onClick={() => setMobileMenuOpen(false)}
+        className="text-gray-500 hover:text-black text-2xl font-light transition"
+      >
+        ✕
+      </button>
     </div>
 
-    <div
-      onClick={() => {
-        navigate("/");
-        setMobileMenuOpen(false);
-      }}
-      className="cursor-pointer hover:text-black"
-    >
-      Home
-    </div>
+    {/* Menu Items */}
+    <div className="mt-6 space-y-6 text-gray-700 font-medium">
 
-    <div className="cursor-pointer hover:text-black">
-      Revamp
-    </div>
+      <div
+        onClick={() => {
+          navigate("/");
+          setMobileMenuOpen(false);
+        }}
+        className="cursor-pointer hover:text-black"
+      >
+        Home
+      </div>
 
-    <div className="cursor-pointer hover:text-black">
-      Native
-    </div>
+      <div className="cursor-pointer hover:text-black">
+        Revamp
+      </div>
 
-    <div className="cursor-pointer hover:text-black">
-      Beauty
+      <div className="cursor-pointer hover:text-black">
+        Native
+      </div>
+
+      <div className="cursor-pointer hover:text-black">
+        Beauty
+      </div>
+
     </div>
 
   </div>

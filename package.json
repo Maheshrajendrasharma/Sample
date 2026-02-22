@@ -1,5 +1,5 @@
 {
-  "name": "urbanbeautyspa",
+  "name": "myurbanhelp",
   "version": "0.1.0",
   "private": true,
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
@@ -13,7 +13,6 @@
   },
   "license": "ISC",
   "author": "",
-
   "main": "postcss.config.js",
   "scripts": {
     "predeploy": "npm run build",

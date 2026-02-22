@@ -1,6 +1,6 @@
 const Footer = () => (
   <footer className="footer">
-    © {new Date().getFullYear()} Urban Beauty Spa. All rights reserved.
+    © {new Date().getFullYear()} myurbanhelp. All rights reserved.
   </footer>
 );
 

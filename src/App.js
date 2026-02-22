@@ -20,8 +20,10 @@ function Layout() {
     <>
       <Navbar />
       <Ticker />
+      <main className="pt-16"></main>
 
       <Routes>
+        
         <Route path="/category/:categorySlug" element={<CategoryPage />} />
         <Route path="/services/:id" element={<ServiceDetails />} />
         <Route path="/register" element={<Register />} />
