@@ -1,29 +1,19 @@
 import CategorySlider from "./CategorySlider";
+import { useState } from "react";
 
 export default function MasonrySlider() {
+  const [isPaused, setIsPaused] = useState(false);
+
   return (
-    <div className="grid grid-cols-2 gap-6 h-[520px]">
-
-      {/* Beauty */}
-      <div className="h-full">
-        <CategorySlider category="beauty" title="Beauty" />
-      </div>
-
-      {/* Massage */}
-      <div className="h-full">
-        <CategorySlider category="massage" title="Massage" />
-      </div>
-
-      {/* Kitchen */}
-      <div className="h-full">
-        <CategorySlider category="kitchen" title="Kitchen Services" />
-      </div>
-
-      {/* Household Repair */}
-      <div className="h-full">
-        <CategorySlider category="household-repair" title="Household Repair" />
-      </div>
-
+    <div
+      className="grid grid-cols-2 gap-6"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
+      <CategorySlider category="beauty" title="Beauty" paused={isPaused} />
+      <CategorySlider category="massage" title="Massage" paused={isPaused} />
+      <CategorySlider category="kitchen" title="Kitchen Services" paused={isPaused} />
+      <CategorySlider category="household-repair" title="Household Repair" paused={isPaused} />
     </div>
   );
 }

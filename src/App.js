@@ -14,27 +14,25 @@ import Ticker from "./components/Ticker";
 /* 🔹 Layout wrapper to control visibility */
 function Layout() {
   const location = useLocation();
- 
 
   return (
     <>
       <Navbar />
       <Ticker />
-      <main className="pt-16"></main>
 
-      <Routes>
-        
-        <Route path="/category/:categorySlug" element={<CategoryPage />} />
-        <Route path="/services/:id" element={<ServiceDetails />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
+      {/* Main Content */}
+      <main className="pt-16">
+        <Routes>
+          <Route path="/category/:categorySlug" element={<CategoryPage />} />
+          <Route path="/services/:id" element={<ServiceDetails />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
 
-        <Route path="/" element={<Home />} />
-        <Route path="/services" element={<ServicesPage />} />
-        <Route path="/contact" element={<Contact />} />
-      </Routes>
-
-      {/* Hide Book Now only on Home page */}
+          <Route path="/" element={<Home />} />
+          <Route path="/services" element={<ServicesPage />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+      </main>
 
       <FloatingActions />
       <FloatingWhatsapp />

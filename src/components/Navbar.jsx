@@ -298,16 +298,44 @@ useEffect(() => {
           : "text-gray-400"
       }`}
     />
+<input
+  type="text"
+  value={locationName}
+  onChange={(e) => {
+    const value = e.target.value;
+    setLocationName(value);
+  }}
+  onKeyDown={(e) => {
 
-    <input
-      type="text"
-      value={locationName}
-      onChange={(e) => {
-        const value = e.target.value;
-        setLocationName(value);
-      }}
-      className="text-sm outline-none w-full"
-    />
+    if (locationSuggestions.length === 0) return;
+
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      setActiveIndex(prev =>
+        prev < locationSuggestions.length - 1 ? prev + 1 : 0
+      );
+    }
+
+    if (e.key === "ArrowUp") {
+      e.preventDefault();
+      setActiveIndex(prev =>
+        prev > 0 ? prev - 1 : locationSuggestions.length - 1
+      );
+    }
+
+    if (e.key === "Enter") {
+      e.preventDefault();
+
+      const selected =
+        activeIndex >= 0
+          ? locationSuggestions[activeIndex]
+          : locationSuggestions[0];
+
+      selectLocation(selected);
+    }
+  }}
+  className="text-sm outline-none w-full"
+/>
 
   
 
@@ -335,36 +363,7 @@ useEffect(() => {
 
 
 
-    {(e) => {
-
-      if (locationSuggestions.length === 0) return;
-
-      if (e.key === "ArrowDown") {
-        e.preventDefault();
-        setActiveIndex((prev) =>
-          prev < locationSuggestions.length - 1 ? prev + 1 : 0
-        );
-      }
-
-      if (e.key === "ArrowUp") {
-        e.preventDefault();
-        setActiveIndex((prev) =>
-          prev > 0 ? prev - 1 : locationSuggestions.length - 1
-        );
-      }
-
-      if (e.key === "Enter" || e.key === "Tab") {
-        e.preventDefault();
-
-        const selected =
-          activeIndex >= 0
-            ? locationSuggestions[activeIndex]
-            : locationSuggestions[0]; // 🔥 Always pick first
-
-        selectLocation(selected);
-      }
-
-    }}
+   
 
       {/* Status BELOW location */}
       {serviceStatus && (

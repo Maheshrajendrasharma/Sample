@@ -5,10 +5,10 @@ export default function CategorySlider({ category, title, paused }) {
   const navigate = useNavigate();
 
   const imageCountMap = {
-    beauty: 3,
+    beauty: 4,
     massage: 3,
     kitchen: 3,
-    "household-repair": 6,
+    "household-repair": 5,
   };
 
   const images = Array.from(
