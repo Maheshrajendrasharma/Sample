@@ -15,29 +15,30 @@ import Ticker from "./components/Ticker";
 function Layout() {
   const location = useLocation();
 
-  return (
-    <>
-      <Navbar />
-      <Ticker />
+return (
+  <>
+  <Navbar />
+  <Ticker />
 
-      {/* Main Content */}
-      <main className="pt-16">
-        <Routes>
-          <Route path="/category/:categorySlug" element={<CategoryPage />} />
-          <Route path="/services/:id" element={<ServiceDetails />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
+  <main className="pt-24 md:pt-32">
+    <Routes>
+      <Route path="/category/:categorySlug" element={<CategoryPage />} />
+      <Route path="/services/:id" element={<ServiceDetails />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/" element={<Home />} />
+      <Route path="/services" element={<ServicesPage />} />
+      <Route path="/contact" element={<Contact />} />
+    </Routes>
+  </main>
 
-          <Route path="/" element={<Home />} />
-          <Route path="/services" element={<ServicesPage />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
-      </main>
+  <FloatingActions />
+  <FloatingWhatsapp />
+</>
+);
 
-      <FloatingActions />
-      <FloatingWhatsapp />
-    </>
-  );
+
+
 }
 function App() {
   return (

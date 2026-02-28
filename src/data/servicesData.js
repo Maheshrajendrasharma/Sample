@@ -1,161 +1,147 @@
-    export const servicesData = [
-    {
-        category: "Home Cleaning Services",
-        services: [
-        "Full Home Deep Cleaning",
-        "Kitchen Deep Cleaning",
-        "Bathroom Cleaning",
-        "Sofa Cleaning",
-        "Carpet Cleaning",
-        "Mattress Cleaning",    
-        "Curtain Cleaning",
-        "Water Tank Cleaning",
-        "Move-in / Move-out Cleaning",
-        "Post Construction Cleaning",
-        ],
-    },
-    {
-        category: "Appliance Repair Services",
-        services: [
-        "AC Repair & Installation",
-        "Refrigerator Repair",
-        "Washing Machine Repair",
-        "Microwave Repair",
-        "TV Repair",
-        "Geyser Repair",
-        "Chimney Repair",
-        "RO Water Purifier Service",
-        "Dishwasher Repair",
-        ],
-    },
-    {
-        category: "Electrical Services",
-        services: [
-        "Switch & Socket Repair",
-        "Fan Installation",
-        "Light Installation",
-        "Wiring Work",
-        "Inverter Installation",
-        "Doorbell Installation",
-        "MCB / Fuse Repair",
-        ],
-    },
-    {
-        category: "Plumbing Services",
-        services: [
-        "Tap Repair",
-        "Leakage Fixing",
-        "Pipe Installation",
-        "Bathroom Fittings Installation",
-        "Toilet Repair",
-        "Water Motor Installation",
-        "Drain Blockage Removal",
-        ],
-    },
-    {
-        category: "Carpenter Services",
-        services: [
-        "Furniture Repair",
-        "Door Repair",
-        "Modular Kitchen Work",
-        "Wardrobe Installation",
-        "Bed Assembly",
-        "Custom Furniture",
-        ],
-    },
-    {
-        category: "Painting & Renovation",
-        services: [
-        "Interior Painting",
-        "Exterior Painting",
-        "Texture & Designer Walls",
-        "Waterproofing",
-        "Modular Kitchen Setup",
-        "False Ceiling Work",
-        "Tiles Installation",
-        ],
-    },
-    {
-        category: "Beauty & Salon at Home",
-        services: [
-        "Haircut & Styling",
-        "Hair Spa",
-        "Facial",
-        "Waxing",
-        "Manicure / Pedicure",
-        "Bridal Makeup",
-        "Party Makeup",
-        ],
-    },
-    {
-        category: "Spa & Therapy",
-        services: [
-        "Body Massage",
-        "Head Massage",
-        "Aromatherapy",
-        "Ayurvedic Therapy",
-        "Home Spa Packages",
-        ],
-    },
-    {
-        category: "Personal & Lifestyle Services",
-        services: [
-        "Babysitting",
-        "Elder Care",
-        "Home Nursing",
-        "Fitness Trainer at Home",
-        "Yoga Instructor",
-        "Diet Consultation",
-        "Personal Trainer",
-        ],
-    },
-    {
-        category: "Pet Services",
-        services: [
-        "Pet Grooming",
-        "Pet Sitting",
-        "Dog Walking",
-        "Pet Training",
-        ],
-    },
-    {
-        category: "Moving & Utility Services",
-        services: [
-        "Packers & Movers",
-        "Courier Pickup",
-        "Scrap Collection",
-        "Pest Control",
-        "Sanitization Services",
-        "Home Security Installation (CCTV)",
-        ],
-    },
-    {
-        category: "Business & Commercial Services",
-        services: [
-        "Office Cleaning",
-        "Office AC Maintenance",
-        "CCTV Installation",
-        "IT Support",
-        "AMC Contracts",
-        "Facility Management",
-        ],
-    },
-    {
-        category: "Vehicle Services",
-        services: [
-        "Car Wash at Home",
-        "Car Detailing",
-        "Bike Service at Home",
-        "Car Battery Replacement",
-        ],
-    },
-    {
-        category: "Digital & Smart Services",
-        services: [
-        "WiFi Installation",
-        "Smart Home Setup",
-        "Solar Panel Installation",
-        "EV Charger Installation",
-        ],
-    },
-    ];
+export const servicesData = [
+
+  // 🧹 CLEANING & PEST CONTROL
+  {
+    category: "Cleaning & Pest Control",
+    services: [
+      "Full Home Deep Cleaning",
+      "Kitchen Deep Cleaning",
+      "Bathroom Cleaning",
+      "Sofa Cleaning",
+      "Carpet Cleaning",
+      "Mattress Cleaning",
+      "Curtain Cleaning",
+      "Water Tank Cleaning",
+      "Move-in / Move-out Cleaning",
+      "Post Construction Cleaning",
+      "Pest Control Service",
+      "Sanitization Services"
+    ],
+  },
+
+  // 🔧 ELECTRONICS REPAIR & SERVICES
+  {
+    category: "Electronics Repair & Services",
+    services: [
+      "AC Repair & Installation",
+      "Refrigerator Repair",
+      "Washing Machine Repair",
+      "Microwave Repair",
+      "TV Repair",
+      "Geyser Repair",
+      "Chimney Repair",
+      "RO Water Purifier Service",
+      "Dishwasher Repair",
+      "Laptop Repair",
+      "WiFi Setup Service",
+      "CCTV Installation"
+    ],
+  },
+
+  // 🏠 HOME RENOVATION & REPAIR
+  {
+    category: "Home Renovation & Repair",
+    services: [
+      "Electrician Service",
+      "Switch & Socket Repair",
+      "Fan Installation",
+      "Light Installation",
+      "Wiring Work",
+      "Plumber Service",
+      "Tap Repair",
+      "Leakage Fixing",
+      "Carpenter Service",
+      "Furniture Repair",
+      "Interior Painting",
+      "Exterior Painting",
+      "Waterproofing Service",
+      "False Ceiling Work",
+      "Tile Work"
+    ],
+  },
+
+  // 💄 HEALTH & BEAUTY
+  {
+    category: "Health & Beauty",
+    services: [
+      "Haircut at Home",
+      "Hair Coloring",
+      "Facial & Cleanup",
+      "Waxing at Home",
+      "Manicure & Pedicure",
+      "Bridal Makeup",
+      "Bridal Mehendi",
+      "Party Makeup",
+      "Head Massage",
+      "Body Massage",
+      "Home Spa Packages",
+      "Physiotherapy at Home",
+      "Yoga Trainer at Home"
+    ],
+  },
+
+  // 🚚 PACKERS & MOVERS
+  {
+    category: "Packers & Movers",
+    services: [
+      "Local Shifting Service",
+      "Packers & Movers",
+      "Office Shifting",
+      "Loading & Unloading Service"
+    ],
+  },
+
+  // 🎓 EDUCATION & CLASSES
+  {
+    category: "Education & Classes",
+    services: [
+      "Home Tutor",
+      "Online Tutor",
+      "Spoken English Classes",
+      "Computer Classes",
+      "Music Classes",
+      "Dance Classes"
+    ],
+  },
+
+  // ✈ TOURS & TRAVEL
+  {
+    category: "Tours & Travel",
+    services: [
+      "Holiday Package Booking",
+      "Flight Booking Assistance",
+      "Hotel Booking Assistance",
+      "Local Tour Guide",
+      "Car Rental Service",
+      "Visa Assistance"
+    ],
+  },
+
+  // 📑 LEGAL & DOCUMENTATION SERVICES
+  {
+    category: "Legal & Documentation Services",
+    services: [
+      "PAN Card Assistance",
+      "Aadhar Update Service",
+      "GST Registration",
+      "Company Registration",
+      "Rental Agreement Drafting",
+      "Legal Consultation"
+    ],
+  },
+
+  // 🔧 OTHER SERVICES
+  {
+    category: "Other Services",
+    services: [
+      "Car Wash at Home",
+      "Bike Service at Home",
+      "Pet Grooming",
+      "Babysitting",
+      "Elder Care",
+      "Fitness Trainer at Home",
+      "Solar Panel Installation",
+      "EV Charger Installation"
+    ],
+  },
+];

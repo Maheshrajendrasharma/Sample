@@ -23,23 +23,37 @@ function UserLocationMap() {
     );
   }, []);
 
-  return (
-    <div className="map-container">
-      <h2>📍 Your Location & Our Service Area</h2>
-      <p>We provide at-home beauty & spa services near you</p>
+  // ✅ SHOW LOADING STATE
+  if (!location && !error) {
+    return (
+      <div className="w-full h-[400px] md:h-[500px] flex items-center justify-center bg-gray-100 rounded-xl">
+        <p className="text-gray-500">Detecting your location...</p>
+      </div>
+    );
+  }
 
-      {location ? (
-        <iframe
-          title="User Location"
-          width="100%"
-          height="350"
-          style={{ border: 0 }}
-          loading="lazy"
-          src={`https://www.google.com/maps?q=${location.lat},${location.lng}&z=14&output=embed`}
-        />
-      ) : (
-        <p>{error || "Detecting your location..."}</p>
-      )}
+  // ✅ SHOW ERROR STATE
+  if (error) {
+    return (
+      <div className="w-full h-[400px] md:h-[500px] flex items-center justify-center bg-gray-100 rounded-xl">
+        <p className="text-red-500">{error}</p>
+      </div>
+    );
+  }
+
+  // ✅ SAFE RENDER
+  return (
+    <div className="w-full h-[400px] md:h-[500px] rounded-xl overflow-hidden">
+      <iframe
+        src={`https://www.google.com/maps?q=${location.lat},${location.lng}&z=14&output=embed`}
+        width="100%"
+        height="100%"
+        style={{ border: 0 }}
+        allowFullScreen=""
+        loading="lazy"
+        referrerPolicy="no-referrer-when-downgrade"
+        className="w-full h-full"
+      ></iframe>
     </div>
   );
 }

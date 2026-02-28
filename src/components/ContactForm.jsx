@@ -1,17 +1,28 @@
 import { useState } from "react";
 import services from "../data/services";
-
+import {  useEffect } from "react";
 
 
 export default function ContactForm() {
   const [form, setForm] = useState({
     name: "",
     phone: "",
-    service: "",
+    service: "",  
     location: "",
     message: "",
   });
 
+
+  useEffect(() => {
+  const savedLocation = localStorage.getItem("selectedLocation");
+
+  if (savedLocation) {
+    setForm((prev) => ({
+      ...prev,
+      location: savedLocation,
+    }));
+  }
+}, []);
   const [errors, setErrors] = useState({});
 
 const validateField = (name, value) => {
@@ -135,23 +146,29 @@ const handleChange = (e) => {
   Submit Enquiry
 </button>
 
-
-  return (
-    <section className="contact-form-section">
-      <h2>📩 Enquiry Form</h2>
-
-      <form onSubmit={handleSubmit} className="contact-form">
+return (
+  <section className="w-full">
+    <form
+      onSubmit={handleSubmit}
+      className="space-y-5"
+    >
+      {/* Name */}
+      <div>
         <input
           name="name"
           placeholder="Your Name"
           value={form.name}
           onChange={handleChange}
-          required
+          className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-black"
         />
-        {errors.name && <span className="error">{errors.name}</span>}
+        {errors.name && (
+          <p className="text-red-500 text-sm mt-1">{errors.name}</p>
+        )}
+      </div>
 
-
-                <input
+      {/* Phone */}
+      <div>
+        <input
           type="tel"
           name="phone"
           placeholder="Phone Number"
@@ -159,47 +176,80 @@ const handleChange = (e) => {
           onChange={handleChange}
           inputMode="numeric"
           maxLength={10}
+          className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-black"
         />
+        {errors.phone && (
+          <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
+        )}
+      </div>
 
-        {errors.phone && <span className="error">{errors.phone}</span>}
-
-
-
+      {/* Service */}
+      <div>
         <select
-  name="service"
-  value={form.service}
-  onChange={handleChange}
-  required
->
-  <option value="">Select a Service</option>
+          name="service"
+          value={form.service}
+          onChange={handleChange}
+          className="w-full border border-gray-300 rounded-lg px-4 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-black"
+        >
+          <option value="">Select a Service</option>
 
-  {services.map((service, index) => (
-    <option key={index} value={service}>
-      {service}
-    </option>
-  ))}
-</select>
+          {services.map((service, index) => (
+            <option key={index} value={service}>
+              {service}
+            </option>
+          ))}
+        </select>
+        {errors.service && (
+          <p className="text-red-500 text-sm mt-1">{errors.service}</p>
+        )}
+      </div>
 
-{errors.service && <span className="error">{errors.service}</span>}
-
-
-
+      {/* Location */}
+      <div>
         <input
           name="location"
           placeholder="Your Location"
           value={form.location}
           onChange={handleChange}
+          className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-black"
         />
+        {errors.location && (
+          <p className="text-red-500 text-sm mt-1">{errors.location}</p>
+        )}
+      </div>
 
+      {/* Message */}
+      <div>
         <textarea
           name="message"
           placeholder="Message"
           value={form.message}
           onChange={handleChange}
+          rows="4"
+          className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-black"
         />
+        {errors.message && (
+          <p className="text-red-500 text-sm mt-1">{errors.message}</p>
+        )}
+      </div>
 
-        <button type="submit">Submit Enquiry</button>
-      </form>
-    </section>
-  );
+      {/* Submit Button */}
+      <button
+        type="submit"
+        disabled={!isFormValid}
+        className={`w-full py-3 rounded-lg font-semibold transition ${
+          isFormValid
+            ? "bg-black text-white hover:bg-gray-800"
+            : "bg-gray-300 text-gray-500 cursor-not-allowed"
+        }`}
+      >
+        Submit Enquiry
+      </button>
+    </form>
+  </section>
+);
+
+
+
+  
 }
