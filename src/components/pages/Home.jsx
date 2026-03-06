@@ -1,6 +1,6 @@
 import HomeServiceIcons from "../HomeServiceIcons";   // 3x3 grid
 import MasonrySlider from "../MasonrySlider";         // sliding images
-import Services from "../Services";
+import VerifiedReview from "../VerifiedReview";
 
 export default function Home() {
   return (
@@ -23,7 +23,7 @@ export default function Home() {
       </section>
 
       {/* Other sections */}
-      <Services />
+      <VerifiedReview />
     </>
   );
 }

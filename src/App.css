@@ -49,3 +49,15 @@
   width: max-content;
   animation: marquee 20s linear infinite;
 }
+
+/* Hide scrollbar everywhere */
+.scrollbar-hide {
+  overflow: -moz-scrollbars-none;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+}

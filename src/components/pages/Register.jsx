@@ -5,7 +5,10 @@ import {
   RecaptchaVerifier
 } from "firebase/auth";
 
-import { auth } from "../../firebase";
+import { auth, db } from "../../firebase";
+
+import { doc, setDoc } from "firebase/firestore";
+
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -17,39 +20,49 @@ function Register() {
   const [confirmationResult, setConfirmationResult] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
   const [timer, setTimer] = useState(0);
+
   const navigate = useNavigate();
 
   const isPhone = /^[0-9]{10}$/.test(inputValue);
 
-  // ================= TIMER =================
+  // TIMER
   useEffect(() => {
     let interval;
+
     if (timer > 0) {
       interval = setInterval(() => {
         setTimer(prev => prev - 1);
       }, 1000);
     }
+
     return () => clearInterval(interval);
+
   }, [timer]);
 
-  // ================= RECAPTCHA =================
+  // RECAPTCHA
   const setupRecaptcha = () => {
+
     if (!window.recaptchaVerifier) {
+
       window.recaptchaVerifier = new RecaptchaVerifier(
         auth,
         "recaptcha-container",
         { size: "invisible" }
       );
+
     }
+
   };
 
-  // ================= SEND OTP =================
+  // SEND OTP
   const sendOtp = async () => {
+
     try {
+
       setupRecaptcha();
 
-      const appVerifier = window.recaptchaVerifier;
       const phoneNumber = "+91" + inputValue;
+      const appVerifier = window.recaptchaVerifier;
 
       const result = await signInWithPhoneNumber(
         auth,
@@ -58,28 +71,54 @@ function Register() {
       );
 
       setConfirmationResult(result);
-      setTimer(1200); // 20 minutes (1200 seconds)
+
+      setTimer(1200);
+
       alert("OTP sent successfully!");
 
     } catch (error) {
+
       setErrorMessage(error.message);
+
     }
+
   };
 
-  // ================= VERIFY OTP =================
+  // VERIFY OTP
   const verifyOtp = async () => {
+
     try {
-      await confirmationResult.confirm(otp);
-      alert("OTP verified successfully!");
+
+      const result = await confirmationResult.confirm(otp);
+
+      const user = result.user;
+
+      // SAVE USER IN FIRESTORE
+      await setDoc(doc(db, "users", user.uid), {
+
+        phone: inputValue,
+        role: "customer",
+        createdAt: new Date()
+
+      });
+
+      alert("Phone registered successfully!");
+
       navigate("/");
-    } catch (error) {
-      setErrorMessage("Invalid OTP.");
+
+    } catch {
+
+      setErrorMessage("Invalid OTP");
+
     }
+
   };
 
-  // ================= EMAIL REGISTER =================
+  // EMAIL REGISTER
   const handleEmailRegister = async () => {
+
     try {
+
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         inputValue,
@@ -87,15 +126,32 @@ function Register() {
       );
 
       await sendEmailVerification(userCredential.user);
+
+      // SAVE USER IN FIRESTORE
+      await setDoc(doc(db, "users", userCredential.user.uid), {
+
+        email: inputValue,
+        role: "customer",
+        createdAt: new Date()
+
+      });
+
       alert("Verification email sent! Please check your inbox.");
 
+      navigate("/login");
+
     } catch (error) {
+
       setErrorMessage(error.message);
+
     }
+
   };
 
   return (
+
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
+
       <div className="bg-white p-8 rounded-lg shadow-md w-96">
 
         <h2 className="text-2xl font-semibold mb-6 text-center">
@@ -103,7 +159,9 @@ function Register() {
         </h2>
 
         {errorMessage && (
-          <div className="text-red-500 text-sm mb-4">{errorMessage}</div>
+          <div className="text-red-500 text-sm mb-4">
+            {errorMessage}
+          </div>
         )}
 
         <input
@@ -116,6 +174,7 @@ function Register() {
 
         {/* EMAIL FLOW */}
         {!isPhone && (
+
           <>
             <input
               type="password"
@@ -132,19 +191,24 @@ function Register() {
               Register
             </button>
           </>
+
         )}
 
         {/* PHONE FLOW */}
         {isPhone && (
+
           <>
             {!confirmationResult ? (
+
               <button
                 onClick={sendOtp}
                 className="w-full bg-blue-600 text-white py-2 rounded"
               >
                 Send OTP
               </button>
+
             ) : (
+
               <>
                 <input
                   type="text"
@@ -162,21 +226,28 @@ function Register() {
                 </button>
 
                 {timer > 0 && (
+
                   <p className="text-sm text-gray-500 mt-2">
                     OTP expires in {Math.floor(timer / 60)}:
                     {("0" + (timer % 60)).slice(-2)}
                   </p>
+
                 )}
               </>
+
             )}
           </>
+
         )}
 
         <div id="recaptcha-container"></div>
 
       </div>
+
     </div>
+
   );
+
 }
 
 export default Register;

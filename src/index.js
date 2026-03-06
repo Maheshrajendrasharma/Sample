@@ -8,6 +8,12 @@ import "slick-carousel/slick/slick-theme.css";
 
 const rootElement = document.getElementById("root");
 const root = ReactDOM.createRoot(rootElement);
+const params = new URLSearchParams(window.location.search);
+const redirect = params.get("redirect");
+
+if (redirect) {
+  window.history.replaceState(null, null, redirect);
+}
 
 root.render(
   <React.StrictMode>

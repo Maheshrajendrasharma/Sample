@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route} from "react-router-dom";
 import ServiceDetails from "./components/ServiceDetails";
 import Home from "./components/pages/Home";
 import ServicesPage from "./components/pages/ServicesPage";
@@ -10,10 +10,15 @@ import Navbar from "./components/Navbar";
 import FloatingActions from "./components/FloatingActions";
 import FloatingWhatsapp from "./components/FloatingWhatsapp";
 import Ticker from "./components/Ticker";
+import VerifiedReview from "./components/VerifiedReview";
+import DetailServicePage from "./components/pages/DetailServicePage";
+
+  
+
 
 /* 🔹 Layout wrapper to control visibility */
 function Layout() {
-  const location = useLocation();
+  
 
 return (
   <>
@@ -23,12 +28,14 @@ return (
   <main className="pt-24 md:pt-32">
     <Routes>
       <Route path="/category/:categorySlug" element={<CategoryPage />} />
+      <Route path="/service/:categorySlug/:serviceSlug" element={<DetailServicePage/>} />
       <Route path="/services/:id" element={<ServiceDetails />} />
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
       <Route path="/" element={<Home />} />
       <Route path="/services" element={<ServicesPage />} />
       <Route path="/contact" element={<Contact />} />
+      <Route path="/reviews" element={<VerifiedReview />} />
     </Routes>
   </main>
 

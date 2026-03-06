@@ -49,34 +49,30 @@
   }, [locationName]);
 
         const handleSearch = (value) => {
-          
-        setQuery(value);
+  setQuery(value);
 
-        if (!value.trim()) {
-          setResults([]);
-          return;
-        }
+  if (!value.trim()) {
+    setResults([]);
+    return;
+  }
 
+  const searchTerm = value.toLowerCase();
 
+  // ✅ Flatten correctly (service is object now)
+  const flattenedServices = servicesData.flatMap(category =>
+    category.services.map(service => ({
+      name: service.name,
+      category: category.category,
+      id: service.name.replace(/\s+/g, "-").toLowerCase()
+    }))
+  );
 
-        const searchTerm = value.toLowerCase();
+  const filtered = flattenedServices.filter(service =>
+    service.name.toLowerCase().includes(searchTerm)
+  );
 
-        // 🔥 Flatten category + services
-        const flattenedServices = servicesData.flatMap(category =>
-          category.services.map(service => ({
-            name: service,
-            category: category.category,
-            id: service.replace(/\s+/g, "-").toLowerCase()
-          }))
-        );
-
-        // 🔥 Filter services
-        const filtered = flattenedServices.filter(service =>
-          service.name.toLowerCase().includes(searchTerm)
-        );
-
-        setResults(filtered.slice(0, 8)); // limit results
-      };
+  setResults(filtered.slice(0, 8));
+};
 
   
   useEffect(() => {
@@ -103,8 +99,8 @@
     if (!servicesData || servicesData.length === 0) return;
 
     const allServices = servicesData.flatMap(category =>
-      category.services
-    );
+  category.services.map(service => service.name)
+);
 
     if (allServices.length === 0) return;
 
