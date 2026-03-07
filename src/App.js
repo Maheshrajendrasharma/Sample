@@ -12,6 +12,7 @@ import FloatingWhatsapp from "./components/FloatingWhatsapp";
 import Ticker from "./components/Ticker";
 import VerifiedReview from "./components/VerifiedReview";
 import DetailServicePage from "./components/pages/DetailServicePage";
+import BecomePartner from "./components/pages/BecomePartner";
 
   
 
@@ -36,6 +37,7 @@ return (
       <Route path="/services" element={<ServicesPage />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/reviews" element={<VerifiedReview />} />
+      <Route path="/become-partner" element={<BecomePartner />} />
     </Routes>
   </main>
 

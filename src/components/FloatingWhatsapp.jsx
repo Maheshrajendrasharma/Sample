@@ -43,7 +43,7 @@ function FloatingWhatsapp() {
       onTouchStart={handleMouseDown}
       onTouchEnd={handleMouseUp}
       onTouchMove={handleTouchMove}
-      className="fixed z-50 bg-green-500 hover:bg-green-600 p-3 rounded-full shadow-lg transition duration-300 cursor-grab active:cursor-grabbing"
+      className="fixed z-50 bg-green-500 hover:bg-green-600 p-3 md:p-5 rounded-full shadow-lg transition duration-300 cursor-grab active:cursor-grabbing"
       style={{
         bottom: `${position.y}px`,
         right: `${position.x}px`,
@@ -52,7 +52,7 @@ function FloatingWhatsapp() {
       <img
         src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
         alt="WhatsApp"
-        className="w-6 h-6"
+        className="w-6 h-6 md:w-8 md:h-8"
       />
     </a>
   );

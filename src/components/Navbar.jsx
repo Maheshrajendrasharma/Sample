@@ -2,11 +2,13 @@
       import { useNavigate } from "react-router-dom";
       import { servicesData } from "../data/servicesData";
       import { serviceAreas } from "../data/serviceAreas";
-
-
-      import {MapPin, Search, ShoppingCart, User } from "lucide-react";
+      import { FaUserPlus } from "react-icons/fa";
+      import { Link, useLocation } from "react-router-dom";
+      import {MapPin, Search } from "lucide-react";
 
       function Navbar() {
+
+        
 
         // ✅ STEP 3 — ADD HERE (Inside component, above return)
         const navigate = useNavigate();
@@ -25,6 +27,11 @@
         const [isDeleting, setIsDeleting] = useState(false);
         const [typingText, setTypingText] = useState("");
         const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+        const location = useLocation();
+
+  
+
+        
 
       
   useEffect(() => {
@@ -495,30 +502,25 @@
 
   </div>
 
+  {/* Desktop Button */}
+{location.pathname !== "/become-partner" && (
+  <Link to="/become-partner">
+    <button className="hidden md:block bg-black text-white px-4 py-2 rounded-lg">
+      Become a Partner
+    </button>
+  </Link>
+)}
 
-        {/* Cart */}
-        <div className="hidden md:flex relative cursor-pointer items-center">
-    <ShoppingCart size={22} />
+{/* Mobile Icon */}
+{location.pathname !== "/become-partner" && (
+  <Link to="/become-partner">
+    <FaUserPlus className="md:hidden text-xl cursor-pointer" />
+  </Link>
+)}
 
-    <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-1.5 py-0.5 rounded-full">
-      1
-    </span>
-  </div>
           
 
-        {/* Account */}
-        
-      <button
-    onClick={() => navigate("/login")}
-    className="flex items-center gap-2 px-3 py-2 border rounded-lg text-sm font-medium hover:bg-black hover:text-white transition"
-  >
-    <User size={20} />
-
-    {/* Hide text on mobile */}
-    <span className="hidden md:inline">
-      Login
-    </span>
-  </button>
+      
 
     </div>
 
@@ -585,6 +587,20 @@
         <div className="cursor-pointer hover:text-black">
           Beauty
         </div>
+
+
+       {location.pathname !== "/become-partner" && (
+  <div
+    onClick={() => {
+      navigate("/become-partner");
+      setMobileMenuOpen(false);
+    }}
+    className="cursor-pointer hover:text-black flex items-center gap-2"
+  >
+    <FaUserPlus />
+    Become a Partner
+  </div>
+)}
 
       </div>
 

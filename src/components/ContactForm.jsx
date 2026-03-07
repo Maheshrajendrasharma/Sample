@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { servicesData } from "../data/servicesData";
 import Swal from "sweetalert2";
+import { useLocation } from "react-router-dom";
 export default function ContactForm() {
 
   // 🔥 Flatten all services
@@ -21,6 +22,7 @@ export default function ContactForm() {
   const dropdownRef = useRef(null);
   const [serviceInput, setServiceInput] = useState("");
   const [highlightIndex, setHighlightIndex] = useState(-1);
+  const location = useLocation();
   
 
 
@@ -42,6 +44,26 @@ export default function ContactForm() {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  useEffect(() => {
+
+  const selectedService = location.state?.service;
+
+  if (selectedService) {
+
+    setForm(prev => ({
+      ...prev,
+      services: [selectedService]
+    }));
+
+  }
+
+  window.scrollTo({
+  top: 400,
+  behavior: "smooth"
+});
+
+}, [location.state]);
 
   const validateField = (name, value) => {
     let error = "";
